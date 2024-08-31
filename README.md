@@ -1,117 +1,88 @@
-**Project Title**
-----------------
+# Binary Classification Model Using Support Vector Machine (SVM) and Neural Network
+=====================================================================
 
-Machine Learning Model for Parkinson's Disease Diagnosis
-=====================================================
-
-**Description**
----------------
-
-This project involves developing a machine learning model for diagnosing Parkinson's disease using Support Vector Machines (SVMs). The goal is to create an accurate classification model that can 
-predict whether a patient has Parkinson's or not based on certain features.
-
-**Table of Contents**
+Table of Contents
 -----------------
 
-1. [Installation Instructions](#installation-instructions)
-2. [Usage Examples](#usage-examples)
-3. [License Information](#license-information)
-4. [Detailed Explanations of Each Section](#detailed-explanations-of-each-section)
+1. [Project Title and Description](#project-title-and-description)
+2. [Installation Instructions](#installation-instructions)
+3. [Usage Examples](#usage-examples)
+4. [License Information](#license-information)
+5. [Detailed Model Architecture and Hyperparameter Tuning Explanation for SVM](#detailed-model-architecture-and-hyperparameter-tuning-explanation-for-svm)
+6. [Detailed Model Architecture and Hyperparameter Tuning Explanation for Neural Network](#detailed-model-architecture-and-hyperparameter-tuning-explanation-for-neural-network)
+7. [Model Evaluation Metrics](#model-evaluation-metrics)
 
-### Installation Instructions
+## Project Title and Description
+-------------------------------
 
-To install the necessary libraries, follow these steps:
+This project involves developing two binary classification models using a Support Vector Machine (SVM) and a neural network architecture with hyperparameter tuning capabilities.
 
-* Install `numpy` using pip: `pip install numpy`
-* Install `scikit-learn` using pip: `pip install scikit-learn`
+Binary classification is a fundamental problem in machine learning where the goal is to predict one of two classes or categories. This project aims to create efficient and accurate binary 
+classification models that can be used for various real-world applications.
 
-You can also install them using conda if you are using a conda environment.
+## Installation Instructions
+---------------------------
+
+To use this code, you will need to have the following libraries installed:
+
+* `numpy`
+* `pandas`
+* `scikit-learn`
+* `keras` (with a compatible backend like TensorFlow or Theano)
+* `gridsearchcv`
+
+You can install these libraries using pip, the Python package manager. Here's how you can do it:
 
 ```bash
-conda install numpy
-conda install -c conda-forge scikit-learn
+pip install numpy pandas scikit-learn keras gridsearchcv
 ```
 
-### Usage Examples
+## Usage Examples
+-----------------
 
-To use this model, simply follow these steps:
+To use this code, follow these steps:
 
-1. Load your dataset and target values into variables.
-2. Standardize the data using the `standardize_data` function.
-3. Train the SVM model on the standardized data.
-4. Use the trained model to predict whether a new input sample has Parkinson's or not.
+1. Clone the repository to your local machine.
+2. Open a terminal and navigate to the project directory.
+3. Run the script `svm.py` or `nn.py` depending on which model you want to train.
+4. The script will perform hyperparameter tuning using GridSearchCV and print out the best parameters found.
 
-### License Information
+## License Information
+-------------------
 
 This project is licensed under the MIT License.
 
-**Detailed Explanations of Each Section**
---------------------------------------
+## Detailed Model Architecture and Hyperparameter Tuning Explanation for SVM
+--------------------------------------------------------------------------------
 
-### 1. Standardization Function
+The SVM model uses a linear kernel and performs binary classification on the given data. The hyperparameters tuned are:
 
-The `standardize_data` function takes in a dataset and standardizes it using the `StandardScaler`. This standardized data is then used to train the SVM model.
+* `kernel`: 'linear', 'poly', or 'rbf'
+* `degree`: 1, 2, or 3
+* `gamma`: 'scale' or 'auto'
+* `C`: 0.1, 1, or 10
 
-```python
-import numpy as np
-from sklearn import preprocessing
+The GridSearchCV algorithm is used to perform hyperparameter tuning over a grid of values specified above.
 
-def standardize_data(data):
-    scaler = preprocessing.StandardScaler()
-    standardized_data = scaler.fit_transform(data)
-    return standardized_data
-```
+## Detailed Model Architecture and Hyperparameter Tuning Explanation for Neural Network
+------------------------------------------------------------------------------------
 
-### 2. Training the Model
+The neural network model uses three dense layers with a total of 16 neurons in each layer (except for the output layer, which has one neuron). The activation function used is 'sigmoid' for all 
+layers except for the output layer. The hyperparameters tuned are:
 
-To train the model, simply call the `fit` method on the SVM object with the standardized data as arguments.
+* `activation`: 'sigmoid' or 'tanh'
+* `batch_size`: 10, 50, or 100
+* `epochs`: 5, 10, or 20
+* `loss`: 'binary_crossentropy', 'squared_hinge', or 'kullback_leibler_divergence'
+* `optimizer`: 'adam' or 'rmsprop'
 
-```python
-model = svm.SVC(kernel='linear')
-model.fit(x_train_std, y_train)
-```
+The GridSearchCV algorithm is used to perform hyperparameter tuning over a grid of values specified above.
 
-### 3. Making Predictions
+## Model Evaluation Metrics
+----------------------------------------------------------------
 
-To make predictions using the trained model, simply call the `predict` method on the SVM object with a new input sample as an argument.
+Both models are evaluated using several metrics:
 
-```python
-input_data = # your new input data
-s_data = standardize_data(input_data_np.reshape(1, -1))
-pred = model.predict(s_data)
-```
-
-### 4. Evaluation Metrics
-
-To evaluate the performance of the model, you can use various metrics such as accuracy score, precision, recall, F1 score, etc.
-
-```python
-accuracy_score(y_train, x_train_pred)
-precision_score(y_train, x_train_pred)
-recall_score(y_train, x_train_pred)
-f1_score(y_train, x_train_pred)
-```
-
-**Code Snippets**
-
-* `standardize_data` function:
-    ```python
-import numpy as np
-from sklearn import preprocessing
-
-def standardize_data(data):
-    scaler = preprocessing.StandardScaler()
-    standardized_data = scaler.fit_transform(data)
-    return standardized_data
-```
-* Training the model:
-    ```python
-model = svm.SVC(kernel='linear')
-model.fit(x_train_std, y_train)
-```
-* Making predictions:
-    ```python
-input_data = # your new input data
-s_data = standardize_data(input_data_np.reshape(1, -1))
-pred = model.predict(s_data)
-```
+* Brier score (probability calibration)
+* Precision-recall curve and PR AUC
+* F2 score
