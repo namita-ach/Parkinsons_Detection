@@ -7,10 +7,9 @@ Table of Contents
 1. [Project Title and Description](#project-title-and-description)
 2. [Installation Instructions](#installation-instructions)
 3. [Usage Examples](#usage-examples)
-4. [License Information](#license-information)
-5. [Detailed Model Architecture and Hyperparameter Tuning Explanation for SVM](#detailed-model-architecture-and-hyperparameter-tuning-explanation-for-svm)
-6. [Detailed Model Architecture and Hyperparameter Tuning Explanation for Neural Network](#detailed-model-architecture-and-hyperparameter-tuning-explanation-for-neural-network)
-7. [Model Evaluation Metrics](#model-evaluation-metrics)
+4. [Detailed Model Architecture and Hyperparameter Tuning Explanation for SVM](#detailed-model-architecture-and-hyperparameter-tuning-explanation-for-svm)
+5. [Detailed Model Architecture and Hyperparameter Tuning Explanation for Neural Network](#detailed-model-architecture-and-hyperparameter-tuning-explanation-for-neural-network)
+6. [Model Evaluation Metrics](#model-evaluation-metrics)
 
 ## Project Title and Description
 -------------------------------
@@ -46,11 +45,6 @@ To use this code, follow these steps:
 2. Open a terminal and navigate to the project directory.
 3. Run the script `svm.py` or `nn.py` depending on which model you want to train.
 4. The script will perform hyperparameter tuning using GridSearchCV and print out the best parameters found.
-
-## License Information
--------------------
-
-This project is licensed under the MIT License.
 
 ## Detailed Model Architecture and Hyperparameter Tuning Explanation for SVM
 --------------------------------------------------------------------------------
